@@ -14,6 +14,10 @@ public class Main {
         users.add(new User("Winnona", 3, 500));
 
         showUsers(users);
+
+        sendPoints(users.get(0), users.get(1), 100);
+        System.out.println("");
+        showUsers(users);
     }
 
     private static void showUsers(ArrayList<User> userList){
@@ -23,5 +27,10 @@ public class Main {
             User userData = (User) value.next();
             System.out.println(userData.getName() + ", " + userData.getId() + ", " + userData.getPoints());
         }
+    }
+
+    private static void sendPoints(User sender, User receiver, int points){
+        sender.setPoints(sender.getPoints() - points);
+        receiver.setPoints(receiver.getPoints() + points);
     }
 }
