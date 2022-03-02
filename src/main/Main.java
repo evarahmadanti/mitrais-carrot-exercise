@@ -22,6 +22,7 @@ public class Main {
         System.out.println("Transactions History");
         sendPoints(users.get(0), users.get(1), 100);
         sendPoints(users.get(2), users.get(1), 100);
+        sendPoints(users.get(3), users.get(2), 600);
         showUsers(users);
     }
 
@@ -36,12 +37,18 @@ public class Main {
     }
 
     private static void sendPoints(User sender, User receiver, int points){
-        sender.setPoints(sender.getPoints() - points);
-        receiver.setPoints(receiver.getPoints() + points);
-        Date now = new Date();
-        ArrayList<History> historyList = new ArrayList<>();
-        historyList.add(new History(sender.getName(), receiver.getName(), sender.getId(), points, now));
-        getHistory(historyList);
+        if (sender.getPoints() > points){
+            sender.setPoints(sender.getPoints() - points);
+            receiver.setPoints(receiver.getPoints() + points);
+
+            Date now = new Date();
+            ArrayList<History> historyList = new ArrayList<>();
+            historyList.add(new History(sender.getName(), receiver.getName(), sender.getId(), points, now));
+            getHistory(historyList);
+        }
+        else {
+            System.out.println("Try Again! Your points are not enough");
+        }
     }
 
     private static void getHistory(ArrayList<History> historyList){
